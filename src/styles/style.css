@@ -57,6 +57,7 @@
 .task-detail {
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
+  width: 100%;
 }
 
 li {
@@ -69,15 +70,28 @@ li {
   gap: 10px;
 }
 
-.move-icons,
-.fa {
+.move-icons {
   display: flex;
   justify-content: right;
   cursor: move;
 }
 
+.task-item {
+  display: flex;
+}
+
 .task-item .move-icons {
   flex: 1;
+}
+
+.trash-can {
+  display: none;
+}
+
+img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 .completed {
@@ -97,10 +111,6 @@ li {
   font-size: 20px;
 }
 
-.delete-icon {
-  display: none;
-}
-
 .ellipsis-icon:hover + .delete-icon {
   display: inline;
 }
@@ -111,12 +121,6 @@ li {
 }
 
 .fas:hover {
-  cursor: pointer;
-}
-
-.transh-can {
-  width: 25px;
-  height: 25px;
   cursor: pointer;
 }
 

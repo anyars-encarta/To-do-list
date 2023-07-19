@@ -77,15 +77,31 @@ const taskLoad = () => {
 
       // Create Trash Can Icon
       const trashCan = document.createElement('img');
-      trashCan.setAttribute('class', 'fa transh-can');
+      trashCan.setAttribute('class', 'fa trash-can');
       trashCan.src = './assets/trash-can.png';
       trashCan.alt = 'trash-can';
+
+      // Add event Listener to Description
+      taskDetailElement.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (moveIcon.classList.contains('hidden') === false) {
+          moveIcon.classList.add('hidden');
+          moveIcon.style.display = 'none';
+          trashCan.style.display = 'flex';
+          // trashCan.style.justifyContent = 'right';
+        } else if (moveIcon.classList.contains('hidden')) {
+          moveIcon.classList.remove('hidden');
+          moveIcon.style.display = 'flex';
+          trashCan.style.display = 'none';
+        }
+      });
 
       // Add event listener to Trash Can
       trashCan.addEventListener('click', () => {
         Tasks.removeTask(id);
         Tasks.showsuccessMessage('Task removed successfully!');
       });
+
       taskElement.appendChild(checkBox);
       taskElement.appendChild(taskDetailElement);
       taskElement.appendChild(moveIcon);
