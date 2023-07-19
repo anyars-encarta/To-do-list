@@ -120,8 +120,9 @@ li {
 }
 
 .transh-can {
-  font-size: 24px;
-  display: none;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 .move-icons:after {
@@ -133,4 +134,18 @@ li {
   display: flex;
   justify-content: right;
   padding: 10px;
+}
+
+#message {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  display: none;
+}
+
+#date-time {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  color: green;
+  font-weight: bold;
 }

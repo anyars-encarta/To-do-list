@@ -9,7 +9,7 @@
 </head>
 <body class="body">
   <div id="container">
-    <section id="date-time"></section>
+    <section id="date-time">Time goes here</section>
     <h1 class="header">
       Today's To Do
       <span class="fas fa-sync" id="refresh-icon"></span>
@@ -18,18 +18,15 @@
       <input class="addtaks" type="text" id="task-input" placeholder="Add to your list...">
       <span class="fas fa-plus" id="add-icon"></span>
     </div>
+
     <ul id="todo-list">
-      <li class="task-item">
-        <input type="checkbox">
-        <span class="task-detail">To complete my weekly assigment</span>
-        <span class="move-icons"></span>
-        <span class="fa transh-can">&#xf014;</span>
-      </li>
+      <!-- Task content goes here -->
     </ul>
+    
     <button class="clear-button" id="clear-button">Clear all completed</button>
+    <span id="message">Message goes here</span>
   </div>
 
-
-  <script src="./main.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 </html>
