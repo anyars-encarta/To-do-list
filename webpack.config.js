@@ -5,6 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
     mode: 'development',
     entry: {
+        index: './src/index.js',
         bundle: path.resolve(__dirname, 'src/index.js'),
     },
     output: {
@@ -13,10 +14,11 @@ module.exports = {
         clean: true,
         assetModuleFilename: '[name][ext]',
     },
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'dist'),
+            // directory: path.resolve(__dirname, 'dist'),
+            static: './dist',
         },
         port: 3000,
         open: true,
@@ -48,10 +50,10 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'To Do List',
+            title: 'Output Management',
             filename: 'index.html',
             template: 'src/template.html',
         }),
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
     ],
 }
