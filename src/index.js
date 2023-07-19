@@ -1,4 +1,3 @@
-/* eslint-disable object-shorthand */
 import './styles/style.css';
 import myDateTime from './modules/date-time.js';
 // Load Tasks
