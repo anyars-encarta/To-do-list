@@ -1,3 +1,6 @@
+/* eslint-disable object-shorthand */
+import './styles/style.css';
+import myDateTime from './modules/date-time.js';
 // Load Tasks
 const tasks = [
   {
@@ -48,12 +51,8 @@ function addTasks() {
   </li>`)).join(' ')}`;
 }
 
-// tasks.forEach((task) => {
-//   if(task[2] === true) {
-//     document.getElementById('checkBx').checked = true;
-//   } else {
-//     document.getElementById('checkBx').checked = false;
-//   }
-// });
-
-document.addEventListener('DOMContentLoaded', addTasks);
+// Fetched from module
+document.addEventListener('DOMContentLoaded', () => {
+  addTasks();
+  myDateTime();
+});
