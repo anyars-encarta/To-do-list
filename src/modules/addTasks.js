@@ -56,44 +56,43 @@ const taskLoad = () => {
       Tasks.showsuccessMessage('Task removed successfully!');
     }
 
-    static renderTasks(id, taskDetails, completed) {
+    static renderTasks(id, taskDetails) {
     // Create list of tasks
       const taskElement = document.createElement('li');
       taskElement.setAttribute('id', `task-${id}`);
       taskElement.setAttribute('class', 'task-item');
-    
-    //Create a CheckBox element
+
+      // Create a CheckBox element
       const checkBox = document.createElement('input');
       checkBox.setAttribute('type', 'checkbox');
-      
-    //Create Task Detail element
+
+      // Create Task Detail element
       const taskDetailElement = document.createElement('span');
       taskDetailElement.setAttribute('class', 'task-detail');
       taskDetailElement.textContent = `${taskDetails}`;
 
-    //Create Move icons
-    const moveIcon = document.createElement('span');
-    moveIcon.setAttribute('class', 'move-icons');
+      // Create Move icons
+      const moveIcon = document.createElement('span');
+      moveIcon.setAttribute('class', 'move-icons');
 
-    //Create Trash Can Icon
-    const trashCan = document.createElement('img');
-    trashCan.setAttribute('class', 'fa transh-can');
-    trashCan.src = './assets/trash-can.png';
-    trashCan.alt = 'trash-can';
-    
+      // Create Trash Can Icon
+      const trashCan = document.createElement('img');
+      trashCan.setAttribute('class', 'fa transh-can');
+      trashCan.src = './assets/trash-can.png';
+      trashCan.alt = 'trash-can';
 
-    // Add event listener to Trash Can
-    trashCan.addEventListener('click', () => {
-    Tasks.removeTask(id);
-    Tasks.showsuccessMessage('Task removed successfully!');
-    });
-    taskElement.appendChild(checkBox);
-    taskElement.appendChild(taskDetailElement);
-    taskElement.appendChild(moveIcon);
-    taskElement.appendChild(trashCan);
-    // Add task to list
-    taskListDisplay.appendChild(taskElement);
-  }
+      // Add event listener to Trash Can
+      trashCan.addEventListener('click', () => {
+        Tasks.removeTask(id);
+        Tasks.showsuccessMessage('Task removed successfully!');
+      });
+      taskElement.appendChild(checkBox);
+      taskElement.appendChild(taskDetailElement);
+      taskElement.appendChild(moveIcon);
+      taskElement.appendChild(trashCan);
+      // Add task to list
+      taskListDisplay.appendChild(taskElement);
+    }
 
     static counterAutoIncreatmentId() {
       if (taskLists.length === 0) {

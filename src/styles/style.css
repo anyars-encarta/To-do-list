@@ -59,10 +59,6 @@
   font-family: 'Roboto', sans-serif;
 }
 
-.task-item .move-icons {
-  align-items: right;
-}
-
 li {
   padding: 10px;
   list-style-type: none;
@@ -71,6 +67,13 @@ li {
   flex-direction: row;
   align-items: stretch;
   gap: 10px;
+}
+
+.move-icons,
+.fa {
+  display: flex;
+  justify-content: right;
+  cursor: move;
 }
 
 .task-item .move-icons {
@@ -111,29 +114,25 @@ li {
   cursor: pointer;
 }
 
-.move-icons,
-.fa {
-  display: flex;
-  justify-content: right;
-  align-items: right;
-  cursor: move;
-}
-
 .transh-can {
   width: 25px;
   height: 25px;
   cursor: pointer;
 }
 
-.move-icons:after {
+.move-icons::after {
   content: '\2807';
   font-size: 20px;
-  }
+}
 
-  #container #date-time {
+#container #date-time {
   display: flex;
   justify-content: right;
   padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  color: green;
+  font-weight: bold;
 }
 
 #message {
@@ -141,11 +140,4 @@ li {
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
   display: none;
-}
-
-#date-time {
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  color: green;
-  font-weight: bold;
 }
