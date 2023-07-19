@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="body">
+  <div id="container">
+    <section id="date-time"></section>
+    <h1 class="header">
+      Today's To Do
+      <span class="fas fa-sync" id="refresh-icon"></span>
+    </h1>
+    <div class="input-container">
+      <input class="addtaks" type="text" id="task-input" placeholder="Add to your list...">
+      <span class="fas fa-plus" id="add-icon"></span>
+    </div>
+
+    <ul id="todo-list">
+    </ul>
+    
+    <button class="clear-button" id="clear-button">Clear all completed</button>
+    <span id="message"></span>
+  </div>
+</body>
+</html>
