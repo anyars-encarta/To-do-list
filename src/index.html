@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List</title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body class="body">
   <div id="container">
-    <section id="date-time">Time goes here</section>
+    <section id="date-time"></section>
     <h1 class="header">
       Today's To Do
       <span class="fas fa-sync" id="refresh-icon"></span>
@@ -20,18 +20,13 @@
     </div>
 
     <ul id="todo-list">
-      <!-- <li class="task-item">
-        <input type="checkbox">
-        <span class="task-detail">Something small goes here</span>
-        <span class="move-icons"></span>
-        <div class="trash-container"><img class="trash-can" src="./assets/trash-can.png" alt="trash-can"></div>
-      </li> -->
+      <!-- Task Items go here -->
     </ul>
     
     <button class="clear-button" id="clear-button">Clear all completed</button>
-    <span id="message">Message goes here</span>
+    <span id="message"></span>
   </div>
 
-  <script type="module" src="./main.js"></script>
+  <!-- <script type="module" src="./bundle.js"></script> -->
 </body>
 </html>
