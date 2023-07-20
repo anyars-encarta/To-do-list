@@ -64,12 +64,11 @@
 
 ### Key Features <a name="key-features"></a>
 
-> - Added To Do Items
-> - Added Remove Items
-> - Added Mark Items as Completed
-> - Unmark Items as Completed
-> - Clear all Items
-> - Move Items up and down in the list
+> - Added To Do Tasks
+> - Added Remove Tasks
+> - Added Mark Tasks as Completed
+> - Unmark Tasks as Completed
+> - Clear all completed tasks
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -86,12 +85,6 @@ LIVE DEMO
 ## 💻 Getting Started <a name="getting-started"></a>
 
 > To get a local copy up and running, follow these steps.
-### Prerequisites
-
-1. A Browser (Preferably Google Chrome)
-2. A Code Editor
-3. Internet Connection
-4. Git
 
 <!-- SETUP -->
 ### Setup
@@ -100,10 +93,16 @@ Clone this repository to your desired folder using:
 
 ```sh
   cd my-folder
-  git clone https://github.com/anyars-encarta/Porfolio.git
+  git clone https://github.com/anyars-encarta/To-do-list.git
 ```
-<!-- INSTALL -->
+### Prerequisites
 
+1. A Browser (Preferably Google Chrome)
+2. A Code Editor
+3. Internet Connection
+4. Git
+
+<!-- INSTALL -->
 ### Install
 
 Install this project with the latest version of Git and a code editor.
@@ -111,7 +110,9 @@ Install this project with the latest version of Git and a code editor.
 ### Usage
 
 To run the project, execute the following command:
-> N/A
+
+### Run tests
+> Follow this [link](https://github.com/anyars-encarta/To-do-list.git) to run tests of the project.
 ### Deployment
 
 You can deploy this project using:
@@ -138,10 +139,10 @@ You can deploy this project using:
 
 > Describe 1 - 3 features you will add to the project.
 
-- [ ] **Mark Items as Pending**
-- [ ] **Mark Items as Blocked**
-- [ ] **Unmark Pending Items**
-- [ ] **Unblock Items**
+- [ ] **Mark Tasks as Pending**
+- [ ] **Mark Tasks as Blocked**
+- [ ] **Unmark Pending Tasks**
+- [ ] **Unblock Tasks**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -176,7 +177,7 @@ Contributions, issues, and feature requests are welcome!
 
 - **What new features should be expected in the next release of the project?**
 
-  - I am currently working on adding **Mark Items as Pending**, **Mark Items as Blocked**, and **Unmark Pending Items**, **Unblock Items**.
+  - I am currently working on adding **Mark Tasks as Pending**, **Mark Tasks as Blocked**, and **Unmark Pending Tasks**, **Unblock Tasks**.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
