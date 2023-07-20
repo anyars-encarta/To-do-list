@@ -17,7 +17,6 @@ module.exports = {
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'dist'),
-      // static: './dist',
     },
     port: 3000,
     open: true,
@@ -43,7 +42,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'assets/resource',
+        type: 'asset/resource',
       },
     ],
   },
