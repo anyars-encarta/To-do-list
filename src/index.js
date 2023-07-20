@@ -34,8 +34,8 @@ const editItem = (index, desc) => {
 // Remove tasks
 const removeItem = (index) => {
   todo.splice(index, 1);
-  for (let i = index; i < todo.length; i += 1) {
-    todo[i].index = i + 1;
+  for (let i = index; i < todo.length; i++) {
+    todo[i].index = i++;
   }
   storeItem();
 };
@@ -62,7 +62,7 @@ const findIndex = (e) => {
 function clearTasks() {
   const unchecked = todo.filter((item) => item.completed === false);
   unchecked.forEach((item, index) => {
-    item.index = index + 1;
+    item.index = index;
   });
   todo = unchecked;
   storeItem();

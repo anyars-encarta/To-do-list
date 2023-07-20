@@ -20,7 +20,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -72,14 +71,6 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LIVE DEMO -->
-
-LIVE DEMO
-
-> Link to Live Demo will be added soon.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
@@ -89,11 +80,9 @@ LIVE DEMO
 <!-- SETUP -->
 ### Setup
 
-Clone this repository to your desired folder using:
+To setup this project, run this command:
 
-```sh
-  cd my-folder
-  git clone https://github.com/anyars-encarta/To-do-list.git
+```npm run test
 ```
 ### Prerequisites
 
@@ -105,19 +94,18 @@ Clone this repository to your desired folder using:
 <!-- INSTALL -->
 ### Install
 
-Install this project with the latest version of Git and a code editor.
+Install this project with Iroko.
 
 ### Usage
 
 To run the project, execute the following command:
 
 ### Run tests
-> Follow this [link](https://github.com/anyars-encarta/To-do-list.git) to run tests of the project.
+> npm run test
 ### Deployment
 
 You can deploy this project using:
->1.  A Code Editor
->2. Latest version of Git
+>1.  GitHub Pages
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
