@@ -20,7 +20,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -64,20 +63,11 @@
 
 ### Key Features <a name="key-features"></a>
 
-> - Added To Do Items
-> - Added Remove Items
-> - Added Mark Items as Completed
-> - Unmark Items as Completed
-> - Clear all Items
-> - Move Items up and down in the list
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-LIVE DEMO
-
-> Link to Live Demo will be added soon.
+> - Added To Do Tasks
+> - Added Remove Tasks
+> - Added Mark Tasks as Completed
+> - Unmark Tasks as Completed
+> - Clear all completed tasks
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -86,6 +76,14 @@ LIVE DEMO
 ## 💻 Getting Started <a name="getting-started"></a>
 
 > To get a local copy up and running, follow these steps.
+
+<!-- SETUP -->
+### Setup
+
+To setup this project, run this command:
+
+```npm run test
+```
 ### Prerequisites
 
 1. A Browser (Preferably Google Chrome)
@@ -93,30 +91,21 @@ LIVE DEMO
 3. Internet Connection
 4. Git
 
-<!-- SETUP -->
-### Setup
-
-Clone this repository to your desired folder using:
-
-```sh
-  cd my-folder
-  git clone https://github.com/anyars-encarta/Porfolio.git
-```
 <!-- INSTALL -->
-
 ### Install
 
-Install this project with the latest version of Git and a code editor.
+Install this project with Iroko.
 
 ### Usage
 
 To run the project, execute the following command:
-> N/A
+
+### Run tests
+> npm run test
 ### Deployment
 
 You can deploy this project using:
->1.  A Code Editor
->2. Latest version of Git
+>1.  GitHub Pages
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -138,10 +127,10 @@ You can deploy this project using:
 
 > Describe 1 - 3 features you will add to the project.
 
-- [ ] **Mark Items as Pending**
-- [ ] **Mark Items as Blocked**
-- [ ] **Unmark Pending Items**
-- [ ] **Unblock Items**
+- [ ] **Mark Tasks as Pending**
+- [ ] **Mark Tasks as Blocked**
+- [ ] **Unmark Pending Tasks**
+- [ ] **Unblock Tasks**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -176,7 +165,7 @@ Contributions, issues, and feature requests are welcome!
 
 - **What new features should be expected in the next release of the project?**
 
-  - I am currently working on adding **Mark Items as Pending**, **Mark Items as Blocked**, and **Unmark Pending Items**, **Unblock Items**.
+  - I am currently working on adding **Mark Tasks as Pending**, **Mark Tasks as Blocked**, and **Unmark Pending Tasks**, **Unblock Tasks**.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
