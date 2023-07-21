@@ -34,8 +34,8 @@ const editItem = (index, desc) => {
 // Remove tasks
 const removeItem = (index) => {
   todo.splice(index, 1);
-  for (let i = index; i < todo.length; i++) {
-    todo[i].index = i++;
+  for (let i = index; i < todo.length; i + 1) {
+    todo[i].index = i + 1;
   }
   storeItem();
 };
