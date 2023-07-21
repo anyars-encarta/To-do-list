@@ -1,5 +1,9 @@
 import './style.css';
-import myDateTime from './date-time.js';
+import myDateTime from './modules/date-time.js';
+import {
+  getItem, addItem, editItem, removeItem, findIndex, clearTasks,
+} from './modules/addEditRemove.js';
+import { checkedBox, notChecked } from './modules/taskCompleted.js';
 
 // Declare initial variables
 const list = document.querySelector('#list');
@@ -7,117 +11,66 @@ const addBtn = document.querySelector('#add-btn');
 const clear = document.querySelector('#clear');
 
 // Variable to get Tasks from local storage
-let todo = JSON.parse(localStorage.getItem('items')) || [];
+let todo = getItem();
 
-// Function to save to local storage
-const storeItem = () => {
-  localStorage.setItem('items', JSON.stringify(todo));
-};
-
-// Add new tasks
-const addItem = (desc) => {
-  const item = {
-    desc,
-    completed: false,
-    index: todo.length + 1,
-  };
-  todo.push(item);
-  storeItem();
-};
-
-// Edit existing tasks
-const editItem = (index, desc) => {
-  todo[index].desc = desc;
-  storeItem();
-};
-
-// Remove tasks
-const removeItem = (index) => {
-  todo.splice(index, 1);
-  for (let i = index; i < todo.length; i + 1) {
-    todo[i].index = i + 1;
-  }
-  storeItem();
-};
-
-// Find task indices
-const findIndex = (e) => {
-  const items = document.querySelectorAll('.item');
-  let index = 0;
-
-  for (let i = 0; i < items.length; i += 1) {
-    if (e.target.textContent === todo[i].desc) {
-      index = i;
-    } if (e.target.nextSibling.textContent === todo[i].desc) {
-      index = i;
-    } else if (e.target.previousSibling.textContent === todo[i].desc) {
-      index = i;
-    }
-  }
-
-  return index;
-};
-
-// Function to clear marked completed tasks
-function clearTasks() {
-  const unchecked = todo.filter((item) => item.completed === false);
-  unchecked.forEach((item, index) => {
-    item.index = index;
-  });
-  todo = unchecked;
-  storeItem();
-}
-
-const finalTodo = todo;
-
-// Set checkbox to true and save to local storage
-const checkedBox = (index) => {
-  finalTodo[index].completed = true;
-  storeItem();
-};
-
-// Set checkbox to false and save to local storage
-const notChecked = (index) => {
-  finalTodo[index].completed = false;
-  storeItem();
+// Function to clear existing list content
+const clearList = () => {
+  list.innerHTML = '';
 };
 
 // Sort tasks in descending order based on their indexes
 const todoList = () => {
-  finalTodo.sort((a, b) => a.index - b.index);
+  clearList();
+  todo = todo.sort((a, b) => a.index - b.index);
 
-  finalTodo.forEach((item) => {
+  todo.forEach((item) => {
     list.innerHTML += `
         <li class="item">
-            <input type="checkbox" class="check">
+            <input type="checkbox" class="check" ${item.completed ? 'checked' : ''}>
             <span class="focus">${item.desc}</span>
             <i class="fa fa-ellipsis-v"></i>
         </li>`;
   });
 };
 
-// Event listener to the parent container, edit and remove tasks
+// Function to add task when "Enter" key is pressed
+const handleInputKeyPress = (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const newItem = document.querySelector('#new').value;
+    if (!newItem) {
+      e.preventDefault();
+    } else {
+      addItem(todo, newItem);
+      todoList();
+      document.querySelector('#new').value = '';
+    }
+  }
+};
+
+// Event listener to the input field for "Enter" key press
+document.querySelector('#new').addEventListener('keypress', handleInputKeyPress);
+
+// Event listener to individual task items for editing and removing tasks
 list.addEventListener('click', (e) => {
-  const index = findIndex(e);
+  const index = findIndex(list, e);
   if (e.target.classList.contains('fa-ellipsis-v')) {
-    e.target.parentElement.contentEditable = 'true';
-    e.target.parentElement.addEventListener('input', () => {
-      editItem(index, e.target.parentElement.textContent);
-      storeItem();
+    const item = e.target.parentElement;
+    item.contentEditable = 'true';
+    item.addEventListener('input', () => {
+      editItem(todo, index, item.textContent);
     });
     e.target.classList.remove('fa-ellipsis-v');
     e.target.classList.add('fa-trash');
   } else if (e.target.classList.contains('fa-trash')) {
-    removeItem(index);
+    removeItem(todo, index);
     e.target.parentElement.remove();
   } else if (e.target.classList.contains('check')) {
-    e.target.addEventListener('change', () => {
-      if (e.target.checked) {
-        checkedBox(index);
-      } else {
-        notChecked(index);
-      }
-    });
+    if (e.target.checked) {
+      checkedBox(todo, index);
+    } else {
+      notChecked(todo, index);
+    }
   }
 });
 
@@ -129,7 +82,7 @@ clear.addEventListener('click', () => {
       item.parentElement.remove();
     }
   });
-  clearTasks();
+  todo = clearTasks(todo);
 });
 
 // Event listener to add(+) button
@@ -139,20 +92,15 @@ addBtn.addEventListener('click', (e) => {
   if (!newItem) {
     e.preventDefault();
   } else {
-    addItem(newItem);
-    list.innerHTML += `
-        <li class="item"> 
-          <input type="checkbox" class="check">
-          <span class="focus">${newItem}</span>
-          <i class="fa fa-ellipsis-v"></i>
-        </li>`;
+    addItem(todo, newItem);
+    todoList(); // Update the list after adding a new item
     document.querySelector('#new').value = '';
   }
-  storeItem();
 });
 
 // Event listener to document on loading content
 document.addEventListener('DOMContentLoaded', () => {
+  todo = getItem(); // Fetch the tasks from local storage
   todoList();
   myDateTime();
 });
