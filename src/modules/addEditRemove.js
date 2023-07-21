@@ -1,65 +1,53 @@
-// Variable to get Tasks from local storage
-let todo = JSON.parse(localStorage.getItem('items')) || [];
+// // Variable to get Tasks from local storage
+// const todo = JSON.parse(localStorage.getItem('items')) || [];
 
 // Function to save to local storage
-export const storeItem = () => {
+export const storeItem = (todo) => {
   localStorage.setItem('items', JSON.stringify(todo));
 };
 
+// Function to save to local storage
+export const getItem = () => JSON.parse(localStorage.getItem('items')) || [];
+
 // Add new tasks
-export const addItem = (desc) => {
+export const addItem = (todo, desc) => {
   const item = {
     desc,
     completed: false,
     index: todo.length + 1,
   };
   todo.push(item);
-  storeItem();
+  storeItem(todo);
 };
 
 // Remove tasks
-export const removeItem = (index) => {
+export const removeItem = (todo, index) => {
   todo.splice(index, 1);
-  for (let i = index; i < todo.length; i + 1) {
+  for (let i = index; i < todo.length; i += 1) {
     todo[i].index = i + 1;
   }
-  storeItem();
+  storeItem(todo);
 };
 
 // Edit existing tasks
-export const editItem = (index, desc) => {
+export const editItem = (todo, index, desc) => {
   todo[index].desc = desc;
-  storeItem();
+  storeItem(todo);
 };
 
-// Find task indices
-export const findIndex = (e) => {
-  const items = document.querySelectorAll('.item');
-  let index = 0;
-
-  for (let i = 0; i < items.length; i += 1) {
-    if (e.target.textContent === todo[i].desc) {
-      index = i;
-    } if (e.target.nextSibling.textContent === todo[i].desc) {
-      index = i;
-    } else if (e.target.previousSibling.textContent === todo[i].desc) {
-      index = i;
-    }
-  }
-
+// Find task index
+export const findIndex = (list, e) => {
+  const item = e.target.parentElement;
+  const index = Array.from(list.children).indexOf(item);
   return index;
 };
 
 // Function to clear marked completed tasks
-export function clearTasks() {
-  const unchecked = todo.filter((item) => item.completed === false);
-  unchecked.forEach((item, index) => {
-    item.index = index;
+export function clearTasks(todo) {
+  const updatedTodo = todo.filter((item) => !item.completed);
+  updatedTodo.forEach((item, index) => {
+    item.index = index + 1;
   });
-  todo = unchecked;
-  storeItem();
+  storeItem(updatedTodo);
+  return updatedTodo;
 }
-
-const finalTodo = todo;
-
-export { finalTodo };

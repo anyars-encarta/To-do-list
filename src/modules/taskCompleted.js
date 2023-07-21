@@ -1,13 +1,13 @@
-import { finalTodo, storeItem } from './addEditRemove.js';
+import { storeItem } from './addEditRemove.js';
 
 // Set checkbox to true and save to local storage
-export const checkedBox = (index) => {
-  finalTodo[index].completed = true;
-  storeItem();
+export const checkedBox = (todo, index) => {
+  todo[index].completed = true;
+  storeItem(todo);
 };
 
 // Set checkbox to false and save to local storage
-export const notChecked = (index) => {
-  finalTodo[index].completed = false;
-  storeItem();
+export const notChecked = (todo, index) => {
+  todo[index].completed = false;
+  storeItem(todo);
 };
