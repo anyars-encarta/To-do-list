@@ -1,80 +1,55 @@
-import './style.css';
+import { finalTodo, storeItem, addItem, editItem, removeItem, findIndex, clearTasks } from './modules/edit.js';
+import './styles/style.css';
 import myDateTime from './modules/date-time.js';
-import {
-  getItem, addItem, editItem, removeItem, findIndex, clearTasks,
-} from './modules/addEditRemove.js';
-import { checkedBox, notChecked } from './modules/taskCompleted.js';
+import messages from './modules/messages.js';
+import { checkedBox, notChecked } from './modules/completed.js';
 
-// Declare initial variables
 const list = document.querySelector('#list');
 const addBtn = document.querySelector('#add-btn');
 const clear = document.querySelector('#clear');
+const spanMessage = document.getElementById('message');
 
-// Variable to get Tasks from local storage
-let todo = getItem();
-
-// Function to clear existing list content
-const clearList = () => {
-  list.innerHTML = '';
-};
-
-// Sort tasks in descending order based on their indexes
+/* To-do list displaying and storing */
 const todoList = () => {
-  clearList();
-  todo = todo.sort((a, b) => a.index - b.index);
+  finalTodo.sort((a, b) => a.index - b.index);
 
-  todo.forEach((item) => {
+  finalTodo.forEach((item) => {
     list.innerHTML += `
         <li class="item">
-            <input type="checkbox" class="check" ${item.completed ? 'checked' : ''}>
-            <span class="focus">${item.desc}</span>
+            <input type="checkbox" class="check">
+            <span>${item.desc}</span>
             <i class="fa fa-ellipsis-v"></i>
         </li>`;
   });
 };
 
-// Function to add task when "Enter" key is pressed
-const handleInputKeyPress = (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    const newItem = document.querySelector('#new').value;
-    if (!newItem) {
-      e.preventDefault();
-    } else {
-      addItem(todo, newItem);
-      todoList();
-      document.querySelector('#new').value = '';
-    }
-  }
-};
-
-// Event listener to the input field for "Enter" key press
-document.querySelector('#new').addEventListener('keypress', handleInputKeyPress);
-
-// Event listener to individual task items for editing and removing tasks
+/* List Listeners */
 list.addEventListener('click', (e) => {
-  const index = findIndex(list, e);
+  const index = findIndex(e);
+  console.log(e.target)
   if (e.target.classList.contains('fa-ellipsis-v')) {
-    const item = e.target.parentElement;
-    item.contentEditable = 'true';
-    item.addEventListener('input', () => {
-      editItem(todo, index, item.textContent);
+    e.target.parentElement.contentEditable = 'true';
+    e.target.parentElement.firstElementChild.nextElementSibling.style.border = '1px solid red';
+    e.target.parentElement.addEventListener('input', () => {
+      editItem(index, e.target.parentElement.textContent);
+      storeItem();
     });
     e.target.classList.remove('fa-ellipsis-v');
     e.target.classList.add('fa-trash');
   } else if (e.target.classList.contains('fa-trash')) {
-    removeItem(todo, index);
+    removeItem(index);
     e.target.parentElement.remove();
   } else if (e.target.classList.contains('check')) {
-    if (e.target.checked) {
-      checkedBox(todo, index);
-    } else {
-      notChecked(todo, index);
-    }
+    e.target.addEventListener('change', () => {
+      if (e.target.checked) {
+        checkedBox(index);
+      } else {
+        notChecked(index);
+      }
+    });
   }
 });
 
-// Clear(remove) all completed marked tasks
 clear.addEventListener('click', () => {
   const items = document.querySelectorAll('.check');
   items.forEach((item) => {
@@ -82,25 +57,29 @@ clear.addEventListener('click', () => {
       item.parentElement.remove();
     }
   });
-  todo = clearTasks(todo);
+  clearTasks();
 });
 
-// Event listener to add(+) button
 addBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const newItem = document.querySelector('#new').value;
   if (!newItem) {
     e.preventDefault();
   } else {
-    addItem(todo, newItem);
-    todoList(); // Update the list after adding a new item
+    addItem(newItem);
+    list.innerHTML += `
+        <li class="item"> 
+          <input type="checkbox" class="check">
+          <span>${newItem}</span>
+          <i class="fa fa-ellipsis-v"></i>
+        </li>`;
     document.querySelector('#new').value = '';
   }
+  storeItem();
 });
 
-// Event listener to document on loading content
 document.addEventListener('DOMContentLoaded', () => {
-  todo = getItem(); // Fetch the tasks from local storage
   todoList();
   myDateTime();
+  messages();
 });
