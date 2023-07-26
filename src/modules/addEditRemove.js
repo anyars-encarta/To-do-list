@@ -1,6 +1,3 @@
-// // Variable to get Tasks from local storage
-// const todo = JSON.parse(localStorage.getItem('items')) || [];
-
 // Function to save to local storage
 export const storeItem = (todo) => {
   localStorage.setItem('items', JSON.stringify(todo));
