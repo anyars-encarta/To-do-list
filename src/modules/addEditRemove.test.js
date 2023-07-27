@@ -18,6 +18,7 @@ const localStorageMock = {
   },
 };
 
+// addItem test
 describe('addItem function', () => {
   beforeEach(() => {
     localStorageMock.clear();
@@ -36,5 +37,12 @@ describe('addItem function', () => {
       completed: false,
       index: initialTodo.length + 1,
     });
+  });
+});
+
+// removeItem test
+describe('removeItem function', () => {
+  beforeEach(() => {
+    localStorageMock.clear();
   });
 });
