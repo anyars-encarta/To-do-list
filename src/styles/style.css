@@ -6,7 +6,7 @@
   box-sizing: border-box;
   background-color: #f4f3f4;
 }
-
+ 
 .container {
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
   justify-content: space-between;
 }
 
-.addtasks {
+.addtaks {
   font-style: italic;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
@@ -64,6 +64,10 @@
   flex: 1;
   width: 100%;
   border: none;
+}
+
+*:focus {
+  outline: none !important;
 }
 
 input[type="text"] {
@@ -111,18 +115,19 @@ li {
   text-decoration: line-through;
 }
 
+.clear-button:hover {
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+
 .clear-button {
   border: none;
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 15px;
   max-width: 100%;
-}
-
-.clear-button:hover {
-  background-color: green;
-  color: white;
-  cursor: pointer;
+  /* height: 50%; */
 }
 
 .ellipsis-icon:hover + .delete-icon {
@@ -168,9 +173,4 @@ li {
 
 .fa-ellipsis-v {
   cursor: move;
-}
-
-.focus:focus {
-  border: 1px solid red;
-  box-shadow: 0 2px 4px rgba(133, 128, 128, 0.4);
 }
