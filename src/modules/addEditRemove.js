@@ -34,9 +34,11 @@ export const removeItem = (todo, indexToRemove, localStorage) => {
     if (indexToRemove >= 0 && indexToRemove < todo.length) {
       const updatedTodo = todo.filter((item, index) => index !== indexToRemove);
       updatedTodo.forEach((item, index) => {
-        item.index = index + 1; // Update the index property correctly
+        // Update the index property correctly
+        item.index = index + 1; 
       });
-      storeItem(updatedTodo, localStorage); // Update localStorage after removing the item
+      storeItem(updatedTodo, localStorage);
+      // Update localStorage after removing the item
     } else {
       console.error('Invalid indexToRemove:', indexToRemove);
     }

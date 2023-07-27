@@ -1,14 +1,15 @@
-//addEditRemove.test.js
 import { addItem, removeItem, getItem } from './addEditRemove';
 import 'jest-localstorage-mock';
 
 const localStorageMock = {
-  items: {}, // Initialize items property
+  // Initialize items property
+  items: {}, 
   getItem(key) {
     return this.items[key];
   },
   setItem(key, value) {
-    this.items[key] = value.toString(); // Update items property
+    // Update items property
+    this.items[key] = value.toString(); 
   },
   clear() {
     this.items = {};
@@ -27,7 +28,8 @@ describe('addItem function', () => {
   test('should add an item to the list and update localStorage', () => {
     const initialTodo = [];
     const newDesc = 'Task 3';
-    const clonedTodo = [...initialTodo]; // Create a shallow copy of the array
+    // Create a shallow copy of the array
+    const clonedTodo = [...initialTodo];
     addItem(clonedTodo, newDesc, localStorageMock);
 
     const updatedTodo = JSON.parse(localStorageMock.getItem('items'));
