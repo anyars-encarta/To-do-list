@@ -52,14 +52,20 @@ describe('removeItem function', () => {
       { desc: 'Task 2', completed: true, index: 2 },
       { desc: 'Task 3', completed: false, index: 3 },
     ];
- // Specify the index to remove (0 for the first item in the list)
+    // Specify the index to remove (0 for the first item in the list)
     const indexToRemove = 0;
     removeItem(initialTodo, indexToRemove, localStorageMock);
 
     // Get the updated items from localStorage
     const storedItems = getItem(localStorageMock);
+    // Check the stored items
+    console.log('Stored items:', storedItems);
 
+    // Calculate the updated length manually
+    const updatedLength = initialTodo.length - 1;
 
-
+    expect(storedItems.length).toBe(updatedLength); // Expecting 2 items in the updated list
+    expect(storedItems[0].desc).toBe('Task 2'); // The first item should now be 'Task 2'
+    expect(storedItems[1].desc).toBe('Task 3'); // The second item should now be 'Task 3'
   });
 });
