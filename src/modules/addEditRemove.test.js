@@ -1,15 +1,15 @@
-import { addItem, removeItem, getItem } from './addEditRemove';
+import { addItem, removeItem, getItem } from './addEditRemove.js';
 import 'jest-localstorage-mock';
 
 const localStorageMock = {
   // Initialize items property
-  items: {}, 
+  items: {},
   getItem(key) {
     return this.items[key];
   },
   setItem(key, value) {
     // Update items property
-    this.items[key] = value.toString(); 
+    this.items[key] = value.toString();
   },
   clear() {
     this.items = {};
