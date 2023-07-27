@@ -63,9 +63,11 @@ describe('removeItem function', () => {
 
     // Calculate the updated length manually
     const updatedLength = initialTodo.length - 1;
-
-    expect(storedItems.length).toBe(updatedLength); // Expecting 2 items in the updated list
-    expect(storedItems[0].desc).toBe('Task 2'); // The first item should now be 'Task 2'
-    expect(storedItems[1].desc).toBe('Task 3'); // The second item should now be 'Task 3'
+    // Expecting 2 items in the updated list
+    expect(storedItems.length).toBe(updatedLength);
+    // The first item should now be 'Task 2'
+    expect(storedItems[0].desc).toBe('Task 2');
+    // The second item should now be 'Task 3'
+    expect(storedItems[1].desc).toBe('Task 3');
   });
 });
