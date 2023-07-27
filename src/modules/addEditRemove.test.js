@@ -45,4 +45,21 @@ describe('removeItem function', () => {
   beforeEach(() => {
     localStorageMock.clear();
   });
+
+  test('should remove an item from the list and update localStorage', () => {
+    const initialTodo = [
+      { desc: 'Task 1', completed: false, index: 1 },
+      { desc: 'Task 2', completed: true, index: 2 },
+      { desc: 'Task 3', completed: false, index: 3 },
+    ];
+ // Specify the index to remove (0 for the first item in the list)
+    const indexToRemove = 0;
+    removeItem(initialTodo, indexToRemove, localStorageMock);
+
+    // Get the updated items from localStorage
+    const storedItems = getItem(localStorageMock);
+
+
+
+  });
 });
