@@ -2,7 +2,6 @@
 export const storeItem = (todo, localStorage) => {
   if (localStorage) {
     localStorage.setItem('items', JSON.stringify(todo));
-    console.log('Stored items:', localStorage.getItem('items'));
   }
 };
 
@@ -10,7 +9,6 @@ export const storeItem = (todo, localStorage) => {
 export const getItem = (localStorage) => {
   if (localStorage) {
     const storedItems = localStorage.getItem('items');
-    console.log('Retrieved items:', storedItems);
     return JSON.parse(storedItems) || [];
   }
   return [];

@@ -58,8 +58,6 @@ describe('removeItem function', () => {
 
     // Get the updated items from localStorage
     const storedItems = getItem(localStorageMock);
-    // Check the stored items
-    console.log('Stored items:', storedItems);
 
     // Calculate the updated length manually
     const updatedLength = initialTodo.length - 1;
