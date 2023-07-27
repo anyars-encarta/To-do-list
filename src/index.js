@@ -1,13 +1,13 @@
-import { finalTodo, storeItem, addItem, editItem, removeItem, findIndex, clearTasks } from './modules/edit.js';
+import {
+  finalTodo, storeItem, addItem, editItem, removeItem, findIndex, clearTasks,
+} from './modules/edit.js';
 import './styles/style.css';
 import myDateTime from './modules/date-time.js';
-import messages from './modules/messages.js';
 import { checkedBox, notChecked } from './modules/completed.js';
 
 const list = document.querySelector('#list');
 const addBtn = document.querySelector('#add-btn');
 const clear = document.querySelector('#clear');
-const spanMessage = document.getElementById('message');
 
 /* To-do list displaying and storing */
 const todoList = () => {
@@ -26,7 +26,7 @@ const todoList = () => {
 /* List Listeners */
 list.addEventListener('click', (e) => {
   const index = findIndex(e);
-  console.log(e.target)
+
   if (e.target.classList.contains('fa-ellipsis-v')) {
     e.target.parentElement.contentEditable = 'true';
     e.target.parentElement.firstElementChild.nextElementSibling.style.border = '1px solid red';
@@ -81,5 +81,4 @@ addBtn.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   todoList();
   myDateTime();
-  messages();
 });
