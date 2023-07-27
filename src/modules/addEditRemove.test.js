@@ -18,3 +18,10 @@ const localStorageMock = {
   },
 };
 
+describe('addItem function', () => {
+  beforeEach(() => {
+    localStorageMock.clear();
+  })
+
+
+});
