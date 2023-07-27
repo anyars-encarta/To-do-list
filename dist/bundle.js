@@ -18,43 +18,126 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   removeItem: () => (/* binding */ removeItem),
 /* harmony export */   storeItem: () => (/* binding */ storeItem)
 /* harmony export */ });
-// // Variable to get Tasks from local storage
-// const todo = JSON.parse(localStorage.getItem('items')) || [];
-
 // Function to save to local storage
-var storeItem = function storeItem(todo) {
-  localStorage.setItem('items', JSON.stringify(todo));
+var storeItem = function storeItem(todo, localStorage) {
+  if (localStorage) {
+    localStorage.setItem('items', JSON.stringify(todo));
+    console.log('Stored items:', localStorage.getItem('items'));
+  }
 };
 
-// Function to save to local storage
-var getItem = function getItem() {
-  return JSON.parse(localStorage.getItem('items')) || [];
+// // Function to save to local storage
+// export const storeItem = (todo, localStorage) => {
+//   if (localStorage) {
+//     localStorage.setItem('items', JSON.stringify(todo));
+//   }
+// };
+
+// Function to retrieve from local storage
+var getItem = function getItem(localStorage) {
+  if (localStorage) {
+    var storedItems = localStorage.getItem('items');
+    console.log('Retrieved items:', storedItems);
+    return JSON.parse(storedItems) || [];
+  }
+  return [];
 };
+// // Function to Retrieve local storage
+// export const getItem = (localStorage) => {
+//   if (localStorage) {
+//     return JSON.parse(localStorage.getItem('items')) || [];
+//   }
+//   return [];
+// };
 
 // Add new tasks
-var addItem = function addItem(todo, desc) {
-  var item = {
-    desc: desc,
-    completed: false,
-    index: todo.length + 1
-  };
-  todo.push(item);
-  storeItem(todo);
+var addItem = function addItem(todo, desc, localStorage) {
+  if (localStorage) {
+    var item = {
+      desc: desc,
+      completed: false,
+      index: todo.length + 1
+    };
+    todo.push(item);
+    storeItem(todo, localStorage);
+  }
 };
+var removeItem = function removeItem(todo, indexToRemove, localStorage) {
+  console.log('Removing item at index:', indexToRemove);
+  if (localStorage) {
+    // Ensure the index is within the valid range
+    if (indexToRemove >= 0 && indexToRemove < todo.length) {
+      var updatedTodo = todo.filter(function (item, index) {
+        return index !== indexToRemove;
+      });
+      updatedTodo.forEach(function (item, index) {
+        item.index = index + 1; // Update the index property correctly
+      });
+
+      storeItem(updatedTodo, localStorage); // Update localStorage after removing the item
+    } else {
+      console.error('Invalid indexToRemove:', indexToRemove);
+    }
+  }
+};
+// // Remove tasks
+// export const removeItem = (todo, indexToRemove, localStorage) => {
+//   console.log('Removing item at index:', indexToRemove);
+//   if (localStorage) {
+//     // Ensure the index is within the valid range
+//     if (indexToRemove >= 0 && indexToRemove < todo.length) {
+//       todo.splice(indexToRemove, 1);
+//       for (let i = indexToRemove; i < todo.length; i += 1) {
+//         todo[i].index = i + 1;
+//       }
+//       storeItem(todo, localStorage); // Update localStorage after removing the item
+//     } else {
+//       console.error('Invalid indexToRemove:', indexToRemove);
+//     }
+//   }
+// };
 
 // Remove tasks
-var removeItem = function removeItem(todo, index) {
-  todo.splice(index, 1);
-  for (var i = index; i < todo.length; i += 1) {
-    todo[i].index = i + 1;
-  }
-  storeItem(todo);
-};
+// export const removeItem = (todo, indexToRemove, localStorage) => {
+//   if (localStorage) {
+//     const updatedTodo = [...todo]; // Create a shallow copy of the array
+//     updatedTodo.splice(indexToRemove, 1);
+//     for (let i = indexToRemove; i < updatedTodo.length; i += 1) {
+//       updatedTodo[i].index = i + 1;
+//     }
+//     storeItem(updatedTodo, localStorage);
+//   }
+// };
+
+// // Remove tasks
+// export const removeItem = (todo, index, localStorage) => {
+//   if (localStorage) {
+//     // Ensure the index is within the valid range
+//     if (index >= 0 && index < todo.length) {
+//       todo.splice(index, 1);
+//       for (let i = index; i < todo.length; i += 1) {
+//         todo[i].index = i + 1;
+//       }
+//       storeItem(todo, localStorage); // Update localStorage after removing the item
+//     }
+//   }
+// };
+// export const removeItem = (todo, index, localStorage) => {
+//   if (localStorage) {
+//     todo.splice(index, 1);
+//     for (let i = index; i < todo.length; i += 1) {
+//       todo[i].index = i + 1;
+//     }
+//     storeItem(todo, localStorage);
+//   }
+// };
 
 // Edit existing tasks
-var editItem = function editItem(todo, index, desc) {
-  todo[index].desc = desc;
-  storeItem(todo);
+var editItem = function editItem(todo, index, desc, localStorage) {
+  if (localStorage) {
+    todo[index].desc = desc;
+    storeItem(todo, localStorage);
+  }
 };
 
 // Find task index
@@ -65,15 +148,18 @@ var findIndex = function findIndex(list, e) {
 };
 
 // Function to clear marked completed tasks
-function clearTasks(todo) {
-  var updatedTodo = todo.filter(function (item) {
-    return !item.completed;
-  });
-  updatedTodo.forEach(function (item, index) {
-    item.index = index + 1;
-  });
-  storeItem(updatedTodo);
-  return updatedTodo;
+function clearTasks(todo, localStorage) {
+  if (localStorage) {
+    var updatedTodo = todo.filter(function (item) {
+      return !item.completed;
+    });
+    updatedTodo.forEach(function (item, index) {
+      item.index = index + 1;
+    });
+    storeItem(updatedTodo, localStorage);
+    return updatedTodo;
+  }
+  return [];
 }
 
 /***/ }),
