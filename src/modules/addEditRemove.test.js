@@ -8,6 +8,7 @@ const mockLocalStorage = {
   setItem: jest.fn(),
   getItem: jest.fn(),
 };
+
 // Group tests for addEditRemove functions
 describe('addEditRemove functions', () => {
   beforeEach(() => {

@@ -1,11 +1,11 @@
-/* Storage */
+// Storage
 let todo = JSON.parse(localStorage.getItem('items')) || [];
 
 export const storeItem = () => {
   localStorage.setItem('items', JSON.stringify(todo));
 };
 
-/* Add Item */
+// Add Item
 export const addItem = (desc) => {
   const item = {
     desc,
@@ -16,7 +16,7 @@ export const addItem = (desc) => {
   storeItem();
 };
 
-/* Remove Item */
+// Remove Item
 export const removeItem = (index) => {
   todo.splice(index, 1);
   for (let i = index; i < todo.length; i += 1) {
@@ -25,13 +25,13 @@ export const removeItem = (index) => {
   storeItem();
 };
 
-/* Edit Item */
+// Edit Item
 export const editItem = (index, desc) => {
   todo[index].desc = desc;
   storeItem();
 };
 
-/* Find Index */
+// Find Index
 export const findIndex = (e) => {
   const items = document.querySelectorAll('.item');
   let index = 0;
@@ -57,7 +57,7 @@ export function clearTasks() {
   todo = unchecked;
   storeItem();
 }
-
-export const getFinalTodo = () => todo; // Correctly return the todo array
+// Correctly return the todo array
+export const getFinalTodo = () => todo;
 
 export const finalTodo = () => getFinalTodo();
