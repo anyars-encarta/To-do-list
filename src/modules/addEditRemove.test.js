@@ -1,5 +1,7 @@
 // Import the functions to be tested
-import { storeItem, getItem, addItem, removeItem, editItem, findIndex, clearTasks } from './addEditRemove.js';
+import {
+  storeItem, getItem, addItem, removeItem, editItem, findIndex, clearTasks,
+} from './addEditRemove.js';
 
 // Define mockLocalStorage outside the jest.mock function
 const mockLocalStorage = {
@@ -26,7 +28,7 @@ describe('addEditRemove functions', () => {
       // Expect storeItem to have been called with the updated todo
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         'items',
-        JSON.stringify(updatedTodo) // Corrected the expected parameter
+        JSON.stringify(updatedTodo), // Corrected the expected parameter
       );
 
       // Check that mockLocalStorage.setItem is not called directly in the test
@@ -130,7 +132,7 @@ describe('addEditRemove functions', () => {
         JSON.stringify([
           { desc: 'Task 1', completed: false, index: 1 },
           { desc: 'Task 3', completed: false, index: 2 },
-        ])
+        ]),
       );
       // Check that mockLocalStorage.setItem is called only once in the test
       expect(mockLocalStorage.setItem).toHaveBeenCalledTimes(1);
