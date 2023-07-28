@@ -1,19 +1,3 @@
-// Import the functions to be tested
-import {
-  storeItem,
-  getItem,
-  addItem,
-  removeItem,
-  editItem,
-  findIndex,
-  clearTasks,
-} from './addEditRemove.js';
-
-// Define mockLocalStorage outside the jest.mock function
-const mockLocalStorage = {
-  setItem: jest.fn(),
-  getItem: jest.fn(),
-};
 
 // Group tests for addEditRemove functions
 describe('addEditRemove functions', () => {
