@@ -20,9 +20,7 @@ describe('completed functions', () => {
     test('it should set the completed status to true for the given index and call storeItem', () => {
       const indexToCheck = 0;
       jest.spyOn(editModule, 'getFinalTodo'); // Spy on the getFinalTodo function
-
       checkedBox(indexToCheck);
-
       expect(editModule.getFinalTodo).toHaveBeenCalled();
       expect(editModule.storeItem).toHaveBeenCalled();
     });
@@ -33,9 +31,7 @@ describe('completed functions', () => {
     test('it should set the completed status to false for the given index and call storeItem', () => {
       const indexToUncheck = 1;
       jest.spyOn(editModule, 'getFinalTodo'); // Spy on the getFinalTodo function
-
       notChecked(indexToUncheck);
-
       expect(editModule.getFinalTodo).toHaveBeenCalled();
       expect(editModule.storeItem).toHaveBeenCalled();
     });
