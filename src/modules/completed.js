@@ -1,4 +1,5 @@
-import * as editModule from './edit.js'; // Use default import
+// Use default import
+import * as editModule from './edit.js';
 
 export const checkedBox = (index) => {
   // Call the getFinalTodo function to get the updated array
