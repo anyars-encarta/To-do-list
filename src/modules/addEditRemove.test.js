@@ -28,7 +28,8 @@ describe('addEditRemove functions', () => {
       // Expect storeItem to have been called with the updated todo
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         'items',
-        JSON.stringify(updatedTodo), // Corrected the expected parameter
+        // Corrected the expected parameter
+        JSON.stringify(updatedTodo), 
       );
 
       // Check that mockLocalStorage.setItem is not called directly in the test
@@ -73,8 +74,8 @@ describe('addEditRemove functions', () => {
         { desc: 'Task 2', completed: false, index: 2 },
       ];
       const updatedTodo = [{ desc: 'Task 2', completed: false, index: 1 }];
-
-      removeItem(todo, 0, mockLocalStorage); // Removing the first item
+      // Removing the first item
+      removeItem(todo, 0, mockLocalStorage);
 
       // Expect storeItem to have been called with the updated todo
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith('items', JSON.stringify(updatedTodo));
@@ -95,8 +96,8 @@ describe('addEditRemove functions', () => {
         { desc: 'Updated Task', completed: false, index: 1 },
         { desc: 'Task 2', completed: false, index: 2 },
       ];
-
-      editItem(todo, 0, 'Updated Task', mockLocalStorage); // Editing the first item
+      // Editing the first item
+      editItem(todo, 0, 'Updated Task', mockLocalStorage);
 
       // Expect storeItem to have been called with the updated todo
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith('items', JSON.stringify(updatedTodo));
