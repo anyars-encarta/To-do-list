@@ -1,18 +1,4 @@
-import * as editModule from './edit.js';
-import { checkedBox, notChecked } from './completed.js';
 
-// Jest setup file with custom localStorage mock
-import './jest.setup.js';
-
-// Mock the finalTodo function to simulate the data
-jest.mock('./edit', () => ({
-  getFinalTodo: jest.fn(() => [
-    { desc: 'Task 1', completed: false, index: 1 },
-    { desc: 'Task 2', completed: true, index: 2 },
-    { desc: 'Task 3', completed: false, index: 3 },
-  ]),
-  storeItem: jest.fn(),
-}));
 
 describe('completed functions', () => {
   // Test for checkedBox function
