@@ -1,3 +1,13 @@
+// Import the functions to be tested
+import {
+  storeItem,
+  getItem,
+  addItem,
+  removeItem,
+  editItem,
+  findIndex,
+  clearTasks,
+} from './addEditRemove.js';
 
 // Group tests for addEditRemove functions
 describe('addEditRemove functions', () => {
