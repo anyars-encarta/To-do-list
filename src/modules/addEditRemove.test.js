@@ -9,6 +9,12 @@ import {
   clearTasks,
 } from './addEditRemove.js';
 
+
+// Define mockLocalStorage outside the jest.mock function
+const mockLocalStorage = {
+  setItem: jest.fn(),
+  getItem: jest.fn(),
+};
 // Group tests for addEditRemove functions
 describe('addEditRemove functions', () => {
   beforeEach(() => {
