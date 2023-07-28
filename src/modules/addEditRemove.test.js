@@ -29,7 +29,7 @@ describe('addEditRemove functions', () => {
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         'items',
         // Corrected the expected parameter
-        JSON.stringify(updatedTodo), 
+        JSON.stringify(updatedTodo),
       );
 
       // Check that mockLocalStorage.setItem is not called directly in the test
