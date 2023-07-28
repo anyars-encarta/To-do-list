@@ -1,3 +1,4 @@
+// jest.setup.js
 import 'jest-localstorage-mock';
 
 const localStorageMock = (() => {

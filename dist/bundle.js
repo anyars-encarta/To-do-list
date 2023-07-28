@@ -2,165 +2,27 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/modules/addEditRemove.js":
-/*!**************************************!*\
-  !*** ./src/modules/addEditRemove.js ***!
-  \**************************************/
+/***/ "./src/modules/completed.js":
+/*!**********************************!*\
+  !*** ./src/modules/completed.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   addItem: () => (/* binding */ addItem),
-/* harmony export */   clearTasks: () => (/* binding */ clearTasks),
-/* harmony export */   editItem: () => (/* binding */ editItem),
-/* harmony export */   findIndex: () => (/* binding */ findIndex),
-/* harmony export */   getItem: () => (/* binding */ getItem),
-/* harmony export */   removeItem: () => (/* binding */ removeItem),
-/* harmony export */   storeItem: () => (/* binding */ storeItem)
+/* harmony export */   checkedBox: () => (/* binding */ checkedBox),
+/* harmony export */   notChecked: () => (/* binding */ notChecked)
 /* harmony export */ });
-// Function to save to local storage
-var storeItem = function storeItem(todo, localStorage) {
-  if (localStorage) {
-    localStorage.setItem('items', JSON.stringify(todo));
-    console.log('Stored items:', localStorage.getItem('items'));
-  }
+/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./edit.js */ "./src/modules/edit.js");
+
+var checkedBox = function checkedBox(index) {
+  _edit_js__WEBPACK_IMPORTED_MODULE_0__.finalTodo[index].completed = true;
+  (0,_edit_js__WEBPACK_IMPORTED_MODULE_0__.storeItem)();
 };
-
-// // Function to save to local storage
-// export const storeItem = (todo, localStorage) => {
-//   if (localStorage) {
-//     localStorage.setItem('items', JSON.stringify(todo));
-//   }
-// };
-
-// Function to retrieve from local storage
-var getItem = function getItem(localStorage) {
-  if (localStorage) {
-    var storedItems = localStorage.getItem('items');
-    console.log('Retrieved items:', storedItems);
-    return JSON.parse(storedItems) || [];
-  }
-  return [];
+var notChecked = function notChecked(index) {
+  _edit_js__WEBPACK_IMPORTED_MODULE_0__.finalTodo[index].completed = false;
+  (0,_edit_js__WEBPACK_IMPORTED_MODULE_0__.storeItem)();
 };
-// // Function to Retrieve local storage
-// export const getItem = (localStorage) => {
-//   if (localStorage) {
-//     return JSON.parse(localStorage.getItem('items')) || [];
-//   }
-//   return [];
-// };
-
-// Add new tasks
-var addItem = function addItem(todo, desc, localStorage) {
-  if (localStorage) {
-    var item = {
-      desc: desc,
-      completed: false,
-      index: todo.length + 1
-    };
-    todo.push(item);
-    storeItem(todo, localStorage);
-  }
-};
-var removeItem = function removeItem(todo, indexToRemove, localStorage) {
-  console.log('Removing item at index:', indexToRemove);
-  if (localStorage) {
-    // Ensure the index is within the valid range
-    if (indexToRemove >= 0 && indexToRemove < todo.length) {
-      var updatedTodo = todo.filter(function (item, index) {
-        return index !== indexToRemove;
-      });
-      updatedTodo.forEach(function (item, index) {
-        item.index = index + 1; // Update the index property correctly
-      });
-
-      storeItem(updatedTodo, localStorage); // Update localStorage after removing the item
-    } else {
-      console.error('Invalid indexToRemove:', indexToRemove);
-    }
-  }
-};
-// // Remove tasks
-// export const removeItem = (todo, indexToRemove, localStorage) => {
-//   console.log('Removing item at index:', indexToRemove);
-//   if (localStorage) {
-//     // Ensure the index is within the valid range
-//     if (indexToRemove >= 0 && indexToRemove < todo.length) {
-//       todo.splice(indexToRemove, 1);
-//       for (let i = indexToRemove; i < todo.length; i += 1) {
-//         todo[i].index = i + 1;
-//       }
-//       storeItem(todo, localStorage); // Update localStorage after removing the item
-//     } else {
-//       console.error('Invalid indexToRemove:', indexToRemove);
-//     }
-//   }
-// };
-
-// Remove tasks
-// export const removeItem = (todo, indexToRemove, localStorage) => {
-//   if (localStorage) {
-//     const updatedTodo = [...todo]; // Create a shallow copy of the array
-//     updatedTodo.splice(indexToRemove, 1);
-//     for (let i = indexToRemove; i < updatedTodo.length; i += 1) {
-//       updatedTodo[i].index = i + 1;
-//     }
-//     storeItem(updatedTodo, localStorage);
-//   }
-// };
-
-// // Remove tasks
-// export const removeItem = (todo, index, localStorage) => {
-//   if (localStorage) {
-//     // Ensure the index is within the valid range
-//     if (index >= 0 && index < todo.length) {
-//       todo.splice(index, 1);
-//       for (let i = index; i < todo.length; i += 1) {
-//         todo[i].index = i + 1;
-//       }
-//       storeItem(todo, localStorage); // Update localStorage after removing the item
-//     }
-//   }
-// };
-// export const removeItem = (todo, index, localStorage) => {
-//   if (localStorage) {
-//     todo.splice(index, 1);
-//     for (let i = index; i < todo.length; i += 1) {
-//       todo[i].index = i + 1;
-//     }
-//     storeItem(todo, localStorage);
-//   }
-// };
-
-// Edit existing tasks
-var editItem = function editItem(todo, index, desc, localStorage) {
-  if (localStorage) {
-    todo[index].desc = desc;
-    storeItem(todo, localStorage);
-  }
-};
-
-// Find task index
-var findIndex = function findIndex(list, e) {
-  var item = e.target.parentElement;
-  var index = Array.from(list.children).indexOf(item);
-  return index;
-};
-
-// Function to clear marked completed tasks
-function clearTasks(todo, localStorage) {
-  if (localStorage) {
-    var updatedTodo = todo.filter(function (item) {
-      return !item.completed;
-    });
-    updatedTodo.forEach(function (item, index) {
-      item.index = index + 1;
-    });
-    storeItem(updatedTodo, localStorage);
-    return updatedTodo;
-  }
-  return [];
-}
 
 /***/ }),
 
@@ -185,6 +47,85 @@ var myDateTime = function myDateTime() {
   setInterval(dateTimeUpdate, 500);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (myDateTime);
+
+/***/ }),
+
+/***/ "./src/modules/edit.js":
+/*!*****************************!*\
+  !*** ./src/modules/edit.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addItem: () => (/* binding */ addItem),
+/* harmony export */   clearTasks: () => (/* binding */ clearTasks),
+/* harmony export */   editItem: () => (/* binding */ editItem),
+/* harmony export */   finalTodo: () => (/* binding */ finalTodo),
+/* harmony export */   findIndex: () => (/* binding */ findIndex),
+/* harmony export */   removeItem: () => (/* binding */ removeItem),
+/* harmony export */   storeItem: () => (/* binding */ storeItem)
+/* harmony export */ });
+/* Storage */
+var todo = JSON.parse(localStorage.getItem('items')) || [];
+var storeItem = function storeItem() {
+  localStorage.setItem('items', JSON.stringify(todo));
+};
+
+/* Add Item */
+var addItem = function addItem(desc) {
+  var item = {
+    desc: desc,
+    completed: false,
+    index: todo.length + 1
+  };
+  todo.push(item);
+  storeItem();
+};
+
+/* Remove Item */
+var removeItem = function removeItem(index) {
+  todo.splice(index, 1);
+  for (var i = index; i < todo.length; i += 1) {
+    todo[i].index = i + 1;
+  }
+  storeItem();
+};
+
+/* Edit Item */
+var editItem = function editItem(index, desc) {
+  todo[index].desc = desc;
+  storeItem();
+};
+
+/* Find Index */
+var findIndex = function findIndex(e) {
+  var items = document.querySelectorAll('.item');
+  var index = 0;
+  for (var i = 0; i < items.length; i += 1) {
+    if (e.target.textContent === todo[i].desc) {
+      index = i;
+    }
+    if (e.target.nextSibling.textContent === todo[i].desc) {
+      index = i;
+    } else if (e.target.previousSibling.textContent === todo[i].desc) {
+      index = i;
+    }
+  }
+  return index;
+};
+function clearTasks() {
+  var unchecked = todo.filter(function (item) {
+    return item.completed === false;
+  });
+  unchecked.forEach(function (item, index) {
+    item.index = index + 1;
+  });
+  todo = unchecked;
+  storeItem();
+}
+var finalTodo = todo;
+
 
 /***/ }),
 
@@ -7990,47 +7931,19 @@ var VERSION = "2.3.2";
 
 /***/ }),
 
-/***/ "./src/modules/taskCompleted.js":
-/*!**************************************!*\
-  !*** ./src/modules/taskCompleted.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   checkedBox: () => (/* binding */ checkedBox),
-/* harmony export */   notChecked: () => (/* binding */ notChecked)
-/* harmony export */ });
-/* harmony import */ var _addEditRemove_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addEditRemove.js */ "./src/modules/addEditRemove.js");
-
-
-// Set checkbox to true and save to local storage
-var checkedBox = function checkedBox(todo, index) {
-  todo[index].completed = true;
-  (0,_addEditRemove_js__WEBPACK_IMPORTED_MODULE_0__.storeItem)(todo);
-};
-
-// Set checkbox to false and save to local storage
-var notChecked = function notChecked(todo, index) {
-  todo[index].completed = false;
-  (0,_addEditRemove_js__WEBPACK_IMPORTED_MODULE_0__.storeItem)(todo);
-};
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/style.css":
-/*!*************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/style.css ***!
-  \*************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/styles/style.css":
+/*!********************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/styles/style.css ***!
+  \********************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
 // Imports
 
@@ -8076,7 +7989,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.body {
   justify-content: space-between;
 }
 
-.addtasks {
+.addtaks {
   font-style: italic;
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
@@ -8102,6 +8015,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.body {
   flex: 1;
   width: 100%;
   border: none;
+}
+
+*:focus {
+  outline: none !important;
 }
 
 input[type="text"] {
@@ -8207,12 +8124,7 @@ li {
 .fa-ellipsis-v {
   cursor: move;
 }
-
-.focus:focus {
-  border: 1px solid red;
-  box-shadow: 0 2px 4px rgba(133, 128, 128, 0.4);
-}
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAEA;EACE,mBAAmB;EACnB,UAAU;EACV,sBAAsB;EACtB,yBAAyB;AAC3B;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,sBAAsB;EACtB,8CAA8C;EAC9C,uBAAuB;EACvB,aAAa;EACb,6BAA6B;AAC/B;;AAEA;EACE,iBAAiB;EACjB,aAAa;EACb,iCAAiC;EACjC,eAAe;EACf,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,iCAAiC;EACjC,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,6BAA6B;EAC7B,8BAA8B;AAChC;;AAEA;EACE,kBAAkB;EAClB,iCAAiC;EACjC,eAAe;EACf,YAAY;EACZ,aAAa;EACb,UAAU;AACZ;;AAEA;EACE,aAAa;EACb,aAAa;EACb,6BAA6B;EAC7B,8BAA8B;AAChC;;AAEA;EACE,qBAAqB;EACrB,UAAU;EACV,iCAAiC;AACnC;;AAEA;EACE,OAAO;EACP,WAAW;EACX,YAAY;AACd;;AAEA;EACE,YAAY;EACZ,cAAc;AAChB;;AAEA;EACE,YAAY;EACZ,cAAc;EACd,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,cAAc;AAChB;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,gBAAgB;AAClB;;AAEA;EACE,eAAe;EACf,iCAAiC;EACjC,WAAW;AACb;;AAEA;EACE,aAAa;EACb,qBAAqB;EACrB,6BAA6B;EAC7B,aAAa;EACb,mBAAmB;EACnB,oBAAoB;EACpB,SAAS;AACX;;AAEA;EACE,6BAA6B;AAC/B;;AAEA;EACE,YAAY;EACZ,iBAAiB;EACjB,oBAAoB;EACpB,eAAe;EACf,eAAe;AACjB;;AAEA;EACE,uBAAuB;EACvB,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,aAAa;EACb,iCAAiC;EACjC,eAAe;EACf,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,kBAAkB;EAClB,iCAAiC;EACjC,eAAe;EACf,aAAa;AACf;;AAEA;;;EAGE,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,qBAAqB;EACrB,8CAA8C;AAChD","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');\r\n\r\n.body {\r\n  margin: 100px 0 0 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  background-color: #f4f3f4;\r\n}\r\n\r\n.container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 60%;\r\n  margin: 0 auto;\r\n  border: 1px solid #ddd;\r\n  box-shadow: 0 2px 4px rgba(133, 128, 128, 0.4);\r\n  background-color: white;\r\n  padding: 10px;\r\n  border-bottom: 1px solid #ddd;\r\n}\r\n\r\n#date-time {\r\n  text-align: right;\r\n  padding: 10px;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  color: green;\r\n  font-weight: bold;\r\n}\r\n\r\n.header {\r\n  display: flex;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 25px;\r\n  padding: 10px;\r\n  font-weight: normal;\r\n  border-bottom: 1px solid #ddd;\r\n  justify-content: space-between;\r\n}\r\n\r\n.addtasks {\r\n  font-style: italic;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  border: none;\r\n  outline: none;\r\n  width: 90%;\r\n}\r\n\r\n.input-container {\r\n  display: flex;\r\n  padding: 10px;\r\n  border-bottom: 1px solid #ddd;\r\n  justify-content: space-between;\r\n}\r\n\r\n.todo-list {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\n.item span {\r\n  flex: 1;\r\n  width: 100%;\r\n  border: none;\r\n}\r\n\r\ninput[type=\"text\"] {\r\n  border: none;\r\n  font-size: 1em;\r\n}\r\n\r\ninput::placeholder {\r\n  border: none;\r\n  font-size: 1em;\r\n  font-style: italic;\r\n}\r\n\r\ninput[type=\"checkbox\"]:checked + span {\r\n  font-style: italic;\r\n  text-decoration: line-through;\r\n  color: #b9b9b9;\r\n}\r\n\r\nbutton {\r\n  border: none;\r\n}\r\n\r\nul {\r\n  list-style: none;\r\n}\r\n\r\n.task-detail {\r\n  font-size: 20px;\r\n  font-family: 'Roboto', sans-serif;\r\n  width: 100%;\r\n}\r\n\r\nli {\r\n  padding: 10px;\r\n  list-style-type: none;\r\n  border-bottom: 1px solid #ddd;\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: stretch;\r\n  gap: 10px;\r\n}\r\n\r\n.completed {\r\n  text-decoration: line-through;\r\n}\r\n\r\n.clear-button {\r\n  border: none;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  font-size: 15px;\r\n  max-width: 100%;\r\n}\r\n\r\n.clear-button:hover {\r\n  background-color: green;\r\n  color: white;\r\n  cursor: pointer;\r\n}\r\n\r\n.ellipsis-icon:hover + .delete-icon {\r\n  display: inline;\r\n}\r\n\r\n.edit-input {\r\n  outline: none;\r\n  border: none;\r\n}\r\n\r\n.fas:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n#container #date-time {\r\n  display: flex;\r\n  justify-content: right;\r\n  padding: 10px;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  color: green;\r\n  font-weight: bold;\r\n}\r\n\r\n#message {\r\n  text-align: center;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  display: none;\r\n}\r\n\r\n.fa-refresh,\r\n.fa-plus,\r\n.fa-trash {\r\n  cursor: pointer;\r\n}\r\n\r\n.fa-trash:hover {\r\n  cursor: pointer;\r\n  color: red;\r\n}\r\n\r\n.fa-ellipsis-v {\r\n  cursor: move;\r\n}\r\n\r\n.focus:focus {\r\n  border: 1px solid red;\r\n  box-shadow: 0 2px 4px rgba(133, 128, 128, 0.4);\r\n}\r\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/styles/style.css"],"names":[],"mappings":"AAEA;EACE,mBAAmB;EACnB,UAAU;EACV,sBAAsB;EACtB,yBAAyB;AAC3B;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,sBAAsB;EACtB,8CAA8C;EAC9C,uBAAuB;EACvB,aAAa;EACb,6BAA6B;AAC/B;;AAEA;EACE,iBAAiB;EACjB,aAAa;EACb,iCAAiC;EACjC,eAAe;EACf,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,aAAa;EACb,iCAAiC;EACjC,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,6BAA6B;EAC7B,8BAA8B;AAChC;;AAEA;EACE,kBAAkB;EAClB,iCAAiC;EACjC,eAAe;EACf,YAAY;EACZ,aAAa;EACb,UAAU;AACZ;;AAEA;EACE,aAAa;EACb,aAAa;EACb,6BAA6B;EAC7B,8BAA8B;AAChC;;AAEA;EACE,qBAAqB;EACrB,UAAU;EACV,iCAAiC;AACnC;;AAEA;EACE,OAAO;EACP,WAAW;EACX,YAAY;AACd;;AAEA;EACE,wBAAwB;AAC1B;;AAEA;EACE,YAAY;EACZ,cAAc;AAChB;;AAEA;EACE,YAAY;EACZ,cAAc;EACd,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,cAAc;AAChB;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,gBAAgB;AAClB;;AAEA;EACE,eAAe;EACf,iCAAiC;EACjC,WAAW;AACb;;AAEA;EACE,aAAa;EACb,qBAAqB;EACrB,6BAA6B;EAC7B,aAAa;EACb,mBAAmB;EACnB,oBAAoB;EACpB,SAAS;AACX;;AAEA;EACE,6BAA6B;AAC/B;;AAEA;EACE,YAAY;EACZ,iBAAiB;EACjB,oBAAoB;EACpB,eAAe;EACf,eAAe;AACjB;;AAEA;EACE,uBAAuB;EACvB,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,aAAa;EACb,iCAAiC;EACjC,eAAe;EACf,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,kBAAkB;EAClB,iCAAiC;EACjC,eAAe;EACf,aAAa;AACf;;AAEA;;;EAGE,eAAe;AACjB;;AAEA;EACE,eAAe;EACf,UAAU;AACZ;;AAEA;EACE,YAAY;AACd","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');\r\n\r\n.body {\r\n  margin: 100px 0 0 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  background-color: #f4f3f4;\r\n}\r\n\r\n.container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 60%;\r\n  margin: 0 auto;\r\n  border: 1px solid #ddd;\r\n  box-shadow: 0 2px 4px rgba(133, 128, 128, 0.4);\r\n  background-color: white;\r\n  padding: 10px;\r\n  border-bottom: 1px solid #ddd;\r\n}\r\n\r\n#date-time {\r\n  text-align: right;\r\n  padding: 10px;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  color: green;\r\n  font-weight: bold;\r\n}\r\n\r\n.header {\r\n  display: flex;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 25px;\r\n  padding: 10px;\r\n  font-weight: normal;\r\n  border-bottom: 1px solid #ddd;\r\n  justify-content: space-between;\r\n}\r\n\r\n.addtaks {\r\n  font-style: italic;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  border: none;\r\n  outline: none;\r\n  width: 90%;\r\n}\r\n\r\n.input-container {\r\n  display: flex;\r\n  padding: 10px;\r\n  border-bottom: 1px solid #ddd;\r\n  justify-content: space-between;\r\n}\r\n\r\n.todo-list {\r\n  list-style-type: none;\r\n  padding: 0;\r\n  font-family: 'Roboto', sans-serif;\r\n}\r\n\r\n.item span {\r\n  flex: 1;\r\n  width: 100%;\r\n  border: none;\r\n}\r\n\r\n*:focus {\r\n  outline: none !important;\r\n}\r\n\r\ninput[type=\"text\"] {\r\n  border: none;\r\n  font-size: 1em;\r\n}\r\n\r\ninput::placeholder {\r\n  border: none;\r\n  font-size: 1em;\r\n  font-style: italic;\r\n}\r\n\r\ninput[type=\"checkbox\"]:checked + span {\r\n  font-style: italic;\r\n  text-decoration: line-through;\r\n  color: #b9b9b9;\r\n}\r\n\r\nbutton {\r\n  border: none;\r\n}\r\n\r\nul {\r\n  list-style: none;\r\n}\r\n\r\n.task-detail {\r\n  font-size: 20px;\r\n  font-family: 'Roboto', sans-serif;\r\n  width: 100%;\r\n}\r\n\r\nli {\r\n  padding: 10px;\r\n  list-style-type: none;\r\n  border-bottom: 1px solid #ddd;\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: stretch;\r\n  gap: 10px;\r\n}\r\n\r\n.completed {\r\n  text-decoration: line-through;\r\n}\r\n\r\n.clear-button {\r\n  border: none;\r\n  padding-top: 15px;\r\n  padding-bottom: 15px;\r\n  font-size: 15px;\r\n  max-width: 100%;\r\n}\r\n\r\n.clear-button:hover {\r\n  background-color: green;\r\n  color: white;\r\n  cursor: pointer;\r\n}\r\n\r\n.ellipsis-icon:hover + .delete-icon {\r\n  display: inline;\r\n}\r\n\r\n.edit-input {\r\n  outline: none;\r\n  border: none;\r\n}\r\n\r\n.fas:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n#container #date-time {\r\n  display: flex;\r\n  justify-content: right;\r\n  padding: 10px;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  color: green;\r\n  font-weight: bold;\r\n}\r\n\r\n#message {\r\n  text-align: center;\r\n  font-family: 'Roboto', sans-serif;\r\n  font-size: 20px;\r\n  display: none;\r\n}\r\n\r\n.fa-refresh,\r\n.fa-plus,\r\n.fa-trash {\r\n  cursor: pointer;\r\n}\r\n\r\n.fa-trash:hover {\r\n  cursor: pointer;\r\n  color: red;\r\n}\r\n\r\n.fa-ellipsis-v {\r\n  cursor: move;\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8338,29 +8250,29 @@ module.exports = function (item) {
 
 /***/ }),
 
-/***/ "./src/style.css":
-/*!***********************!*\
-  !*** ./src/style.css ***!
-  \***********************/
+/***/ "./src/styles/style.css":
+/*!******************************!*\
+  !*** ./src/styles/style.css ***!
+  \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../node_modules/css-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./src/style.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./style.css */ "./node_modules/css-loader/dist/cjs.js!./src/styles/style.css");
 
       
       
@@ -8739,81 +8651,53 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _modules_date_time_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/date-time.js */ "./src/modules/date-time.js");
-/* harmony import */ var _modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/addEditRemove.js */ "./src/modules/addEditRemove.js");
-/* harmony import */ var _modules_taskCompleted_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/taskCompleted.js */ "./src/modules/taskCompleted.js");
+/* harmony import */ var _modules_edit_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/edit.js */ "./src/modules/edit.js");
+/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/style.css */ "./src/styles/style.css");
+/* harmony import */ var _modules_date_time_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/date-time.js */ "./src/modules/date-time.js");
+/* harmony import */ var _modules_completed_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/completed.js */ "./src/modules/completed.js");
 
 
 
 
-
-// Declare initial variables
 var list = document.querySelector('#list');
 var addBtn = document.querySelector('#add-btn');
 var clear = document.querySelector('#clear');
 
-// Variable to get Tasks from local storage
-var todo = (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.getItem)();
-
-// Function to clear existing list content
-var clearList = function clearList() {
-  list.innerHTML = '';
-};
-
-// Sort tasks in descending order based on their indexes
+/* To-do list displaying and storing */
 var todoList = function todoList() {
-  clearList();
-  todo = todo.sort(function (a, b) {
+  _modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.finalTodo.sort(function (a, b) {
     return a.index - b.index;
   });
-  todo.forEach(function (item) {
-    list.innerHTML += "\n        <li class=\"item\">\n            <input type=\"checkbox\" class=\"check\" ".concat(item.completed ? 'checked' : '', ">\n            <span class=\"focus\">").concat(item.desc, "</span>\n            <i class=\"fa fa-ellipsis-v\"></i>\n        </li>");
+  _modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.finalTodo.forEach(function (item) {
+    list.innerHTML += "\n        <li class=\"item\">\n            <input type=\"checkbox\" class=\"check\">\n            <span>".concat(item.desc, "</span>\n            <i class=\"fa fa-ellipsis-v\"></i>\n        </li>");
   });
 };
 
-// Function to add task when "Enter" key is pressed
-var handleInputKeyPress = function handleInputKeyPress(e) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    var newItem = document.querySelector('#new').value;
-    if (!newItem) {
-      e.preventDefault();
-    } else {
-      (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.addItem)(todo, newItem);
-      todoList();
-      document.querySelector('#new').value = '';
-    }
-  }
-};
-
-// Event listener to the input field for "Enter" key press
-document.querySelector('#new').addEventListener('keypress', handleInputKeyPress);
-
-// Event listener to individual task items for editing and removing tasks
+/* List Listeners */
 list.addEventListener('click', function (e) {
-  var index = (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.findIndex)(list, e);
+  var index = (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.findIndex)(e);
   if (e.target.classList.contains('fa-ellipsis-v')) {
-    var item = e.target.parentElement;
-    item.contentEditable = 'true';
-    item.addEventListener('input', function () {
-      (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.editItem)(todo, index, item.textContent);
+    e.target.parentElement.contentEditable = 'true';
+    e.target.parentElement.firstElementChild.nextElementSibling.style.border = '1px solid red';
+    e.target.parentElement.addEventListener('input', function () {
+      (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.editItem)(index, e.target.parentElement.textContent);
+      (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.storeItem)();
     });
     e.target.classList.remove('fa-ellipsis-v');
     e.target.classList.add('fa-trash');
   } else if (e.target.classList.contains('fa-trash')) {
-    (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.removeItem)(todo, index);
+    (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.removeItem)(index);
     e.target.parentElement.remove();
   } else if (e.target.classList.contains('check')) {
-    if (e.target.checked) {
-      (0,_modules_taskCompleted_js__WEBPACK_IMPORTED_MODULE_3__.checkedBox)(todo, index);
-    } else {
-      (0,_modules_taskCompleted_js__WEBPACK_IMPORTED_MODULE_3__.notChecked)(todo, index);
-    }
+    e.target.addEventListener('change', function () {
+      if (e.target.checked) {
+        (0,_modules_completed_js__WEBPACK_IMPORTED_MODULE_3__.checkedBox)(index);
+      } else {
+        (0,_modules_completed_js__WEBPACK_IMPORTED_MODULE_3__.notChecked)(index);
+      }
+    });
   }
 });
-
-// Clear(remove) all completed marked tasks
 clear.addEventListener('click', function () {
   var items = document.querySelectorAll('.check');
   items.forEach(function (item) {
@@ -8821,27 +8705,23 @@ clear.addEventListener('click', function () {
       item.parentElement.remove();
     }
   });
-  todo = (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.clearTasks)(todo);
+  (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.clearTasks)();
 });
-
-// Event listener to add(+) button
 addBtn.addEventListener('click', function (e) {
   e.preventDefault();
   var newItem = document.querySelector('#new').value;
   if (!newItem) {
     e.preventDefault();
   } else {
-    (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.addItem)(todo, newItem);
-    todoList(); // Update the list after adding a new item
+    (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.addItem)(newItem);
+    list.innerHTML += "\n        <li class=\"item\"> \n          <input type=\"checkbox\" class=\"check\">\n          <span>".concat(newItem, "</span>\n          <i class=\"fa fa-ellipsis-v\"></i>\n        </li>");
     document.querySelector('#new').value = '';
   }
+  (0,_modules_edit_js__WEBPACK_IMPORTED_MODULE_0__.storeItem)();
 });
-
-// Event listener to document on loading content
 document.addEventListener('DOMContentLoaded', function () {
-  todo = (0,_modules_addEditRemove_js__WEBPACK_IMPORTED_MODULE_2__.getItem)(); // Fetch the tasks from local storage
   todoList();
-  (0,_modules_date_time_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  (0,_modules_date_time_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
 });
 })();
 

@@ -58,6 +58,6 @@ export function clearTasks() {
   storeItem();
 }
 
-const finalTodo = todo;
+export const getFinalTodo = () => todo; // Correctly return the todo array
 
-export { finalTodo };
+export const finalTodo = () => getFinalTodo();

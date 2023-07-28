@@ -42,7 +42,7 @@ export const removeItem = (todo, indexToRemove, localStorage) => {
   }
 };
 
-// Edit existing tasks
+// Edit existing tasks working
 export const editItem = (todo, index, desc, localStorage) => {
   if (localStorage) {
     todo[index].desc = desc;
