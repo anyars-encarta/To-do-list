@@ -1,4 +1,8 @@
+import * as editModule from './edit.js';
+import { checkedBox, notChecked } from './completed.js';
 
+// Jest setup file with custom localStorage mock
+import './jest.setup.js';
 
 describe('completed functions', () => {
   // Test for checkedBox function
